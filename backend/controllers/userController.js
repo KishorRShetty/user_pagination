@@ -21,6 +21,8 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+
+//not included in the routes. early stage getUsers
 exports.old_getUsers = async (req, res) => {
   //implementing pagination
   try {
@@ -35,7 +37,7 @@ exports.old_getUsers = async (req, res) => {
       message: "data Error",
     });
   }
-};
+}; 
 
 exports.getUsers = async (req, res) => {
   const usersPerPage = 2;
