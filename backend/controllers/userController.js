@@ -34,3 +34,39 @@ exports.getUsers = async (req, res) => {
     });
   }
 };
+
+exports.getSingleUser = async (req, res) => {
+  const user = await userModel.findById(req.params.id);
+
+  if (!user) {
+    res.status(400).json({
+      success: false,
+      message: "user not found",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    user,
+  });
+};
+
+exports.updateUser = async (req, res) => {
+  //update
+  let user = await userModel.findById(req.params.id);
+  if (!user) {
+    res.status(400).json({
+      success: false,
+      message: "user not found",
+    });
+  }
+
+  user = await userModel.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  }); // try 3rd par new:true and runVal: this will give the updated value in response
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+};
