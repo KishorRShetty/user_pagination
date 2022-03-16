@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const Pagination = require("../pagination");
 
 exports.registerUser = async (req, res) => {
   try {
@@ -20,7 +21,8 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.old_getUsers = async (req, res) => {
+  //implementing pagination
   try {
     const user = await userModel.find({});
     res.status(201).json({
@@ -31,6 +33,29 @@ exports.getUsers = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "data Error",
+    });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  const usersPerPage = 2;
+  try {
+    //find
+    const paginatedResults = new Pagination(
+      userModel.find(),
+      req.query.page
+    ).pagination(usersPerPage);
+    // const user = await userModel.find({}); we're replacing the query with paginated one.
+    const user = await paginatedResults.query; //we're returning this in Pagination class. so access the query
+
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: `data Error\n Error: ${error} `,
     });
   }
 };
