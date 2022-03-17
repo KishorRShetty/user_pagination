@@ -4,7 +4,9 @@ import User from "./component/user/User";
 function App() {
   return (
     <>
-      <h1>Hello</h1> <User />
+      <nav className="header">
+        <h1>User Pagination</h1> <User />
+      </nav>
     </>
   );
 }

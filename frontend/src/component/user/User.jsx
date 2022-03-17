@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const User = () => {
   const dispatch = useDispatch();
-  const {page} = useSelector(state => state.custom); //page from redux custom store
+  //users store from the store
+  const { page } = useSelector((state) => state.users); //page from redux custom store
   const prevPage = () => {
     dispatch({
       type: "prevPage",
@@ -20,17 +21,38 @@ const User = () => {
   const goTo = (event) => {
     dispatch({
       type: "gotoPage",
-      payload:event.target.value,
+      payload: event.target.value,
     });
   };
   return (
-    <>
-      <h2>User Works</h2>
-      <button onClick={nextPage}>&lt;</button>1 2 3 4
-      <button onClick={prevPage}>&gt;</button>
-      GoTo<input type="text" name="pageNo" onChange={goTo}/>
+    <div className="main">
+      <table className="userTable">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Action</th>
+        </tr>
+        {/* logic to get the user */}
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td colSpan={3}>
+            <button onClick={nextPage}>&lt;</button>1 2 3 4
+            <button onClick={prevPage}>&gt;</button>
+            <select>
+              <option>1</option>
+            </select>
+            GoTo
+            <input type="number" name="pageNo" onChange={goTo} />
+          </td>
+        </tr>
+      </table>
+
       <h1>Current Page {page}</h1>
-    </>
+    </div>
   );
 };
 
