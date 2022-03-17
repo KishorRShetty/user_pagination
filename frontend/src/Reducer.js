@@ -28,7 +28,7 @@ export const pageReducer = createReducer(initialState, {
 });
 
 export const usersReducer = createReducer(
-  {users:[]},
+  {users:[]}, //test without it. need to practice more
   {
     getAllUsersRequest: (state) => {
       state.loading = true;
