@@ -28,18 +28,24 @@ export const pageReducer = createReducer(initialState, {
 });
 
 export const usersReducer = createReducer(
-  {},
+  {users:[]},
   {
     getAllUsersRequest: (state) => {
       state.loading = true;
+      console.log('request');
     },
     getAllUsersSuccess: (state, action) => {
       state.loading = false;
-      state.users = action.payload;
+      state.users = action.payload.user;
+      state.userCount=action.payload.userCount;
+      state.usersPerPage=action.payload.usersPerPage;
+      console.log('success');
+      console.log(state.users);
     },
     getAllUsersFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      console.log('failed')
     },
     clearErrors: (state) => {
       state.error = null;

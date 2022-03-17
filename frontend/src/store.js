@@ -4,7 +4,7 @@ import { pageReducer, usersReducer } from "./Reducer";
 const store = configureStore({
   reducer: {
     page: pageReducer,
-    users: usersReducer
+    usersState: usersReducer
   },
 });
 

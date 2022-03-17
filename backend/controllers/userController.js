@@ -56,6 +56,7 @@ exports.getUsers = async (req, res) => {
       success: true,
       user,
       userCount,
+      usersPerPage
     });
   } catch (error) {
     res.status(400).json({

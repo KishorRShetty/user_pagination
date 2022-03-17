@@ -11,8 +11,9 @@ const User = () => {
   const dispatch = useDispatch();
   //users store from the store
   const { page } = useSelector((state) => state.page); //page from redux custom store
-  const { error, users } = useSelector((state) => state.users); //users from redux custom store
+  const { error, users, userCount, usersPerPage } = useSelector((state) => state.usersState); //users from redux custom store
   // const params = useParams();
+
   const prevPage = () => {
     dispatch({
       type: "prevPage",
@@ -32,19 +33,26 @@ const User = () => {
     });
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(
-        `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
-      );
-      // console.log(request);
-      setUsersBE(request.data.user);
-      return request;
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const request = await axios.get(
+  //       `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+  //     );
+  //     // console.log(request);
+  //     setUsersBE(request.data.user);
+  //     return request;
+  //   }
+  //   fetchData();
+  // }, []);
 
-  console.log(usersBE);
+  useEffect(()=>{
+    dispatch(getUsers());
+    console.log(`inside useEffect`+ getUsers())
+  },[dispatch]);
+
+  console.log(`userBE `+usersBE);
+  console.log(`state.user`+users);
+  console.log(users);
 
   return (
     <div className="main">
@@ -90,7 +98,7 @@ const User = () => {
           <td>updatedAt</td>
           <td>options</td>
         </tr>
-        {usersBE.map((usr) => (
+        {users.map((usr) => (
           <tr>
             <td key={usr._id}>{usr.name}</td>
             <td key={usr._id}>{usr.email}</td>
@@ -116,6 +124,7 @@ const User = () => {
         </tr>
       </table>
       <p>{id}</p> <h4>Current Page {page}</h4>
+      <p>user count: {userCount}</p>
     </div>
   );
 };
