@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 const User = () => {
   const dispatch = useDispatch();
   //users store from the store
-  const { page } = useSelector((state) => state.users); //page from redux custom store
+  const { page } = useSelector((state) => state.page); //page from redux custom store
+  const { users } = useSelector((state) => state.users); //users from redux custom store
+
+  // const params = useParams();
   const prevPage = () => {
     dispatch({
       type: "prevPage",
@@ -40,8 +43,8 @@ const User = () => {
           <td></td>
           <td></td>
           <td colSpan={3}>
-            <button onClick={nextPage}>&lt;</button>1 2 3 4
-            <button onClick={prevPage}>&gt;</button>
+            <button onClick={prevPage}>&lt;</button>1 2 3 4
+            <button onClick={nextPage}>&gt;</button>
             <select>
               <option>1</option>
             </select>
@@ -52,6 +55,7 @@ const User = () => {
       </table>
 
       <h1>Current Page {page}</h1>
+      <h3>users:{users}</h3>
     </div>
   );
 };

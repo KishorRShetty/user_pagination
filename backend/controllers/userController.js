@@ -42,6 +42,8 @@ exports.old_getUsers = async (req, res) => {
 exports.getUsers = async (req, res) => {
   const usersPerPage = 2;
   try {
+    //count User
+    const userCount = await userModel.countDocuments();
     //find
     const paginatedResults = new Pagination(
       userModel.find(),
@@ -53,6 +55,7 @@ exports.getUsers = async (req, res) => {
     res.status(201).json({
       success: true,
       user,
+      userCount
     });
   } catch (error) {
     res.status(400).json({
