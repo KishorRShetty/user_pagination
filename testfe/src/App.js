@@ -6,17 +6,32 @@ import axios from "axios";
 function App() {
   const [users, setUsers] = useState([]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       // `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+  //       `https://gorest.co.in/public/v2/posts/100/comments`
+  //       // `https://api.publicapis.org/entries`
+  //     )
+  //     .then((response) => {
+  //       setUsers(response.data);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios
-      .get(
-        // `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
-        `https://gorest.co.in/public/v2/posts/100/comments`
+    async function fetchData() {
+      const request = await axios.get(
+        `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
         // `https://api.publicapis.org/entries`
-      )
-      .then((response) => {
-        setUsers(response.data);
-      });
+      );
+      // console.log(request);
+      setUsers(request.data.user);
+      return request;
+    }
+    fetchData();
   }, []);
+
+  console.log(users);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -31,10 +46,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* User: {users.toString()} */}
-      {users.map((usr) => {
-        return <p>username: {usr.name}</p>;
-      })}
+      <ul>
+        {users.map(usr=>(
+          <li key={usr.id}>{usr.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { getUsers } from "../../action";
 import axios from "axios";
 
 const User = () => {
-
   const [listOfUsers, setlistOfUsers] = useState([]);
 
   const dispatch = useDispatch();
@@ -35,14 +34,29 @@ const User = () => {
   // useEffect(() => {
   //   dispatch(getUsers())
   // }, [dispatch])
-  
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+  //     )
+  //     .then((response) => {
+  //       // axios.get(`https://gorest.co.in/public/v2/posts/100/comments`).then((response)=>{
+  //       setlistOfUsers(response.data);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios.get(`https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`).then((response)=>{
-    // axios.get(`https://gorest.co.in/public/v2/posts/100/comments`).then((response)=>{
-      setlistOfUsers(response.data);
-    })
-  }, [])
-  
+    async function fetchData() {
+      const request = await get(
+        `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+      );
+      console.log(request);
+      return request;
+    }
+    fetchData();
+  }, []);
+
   console.log(listOfUsers);
 
   return (
