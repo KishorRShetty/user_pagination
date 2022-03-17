@@ -5,18 +5,7 @@ import axios from "axios";
 
 function App() {
   const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       // `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
-  //       `https://gorest.co.in/public/v2/posts/100/comments`
-  //       // `https://api.publicapis.org/entries`
-  //     )
-  //     .then((response) => {
-  //       setUsers(response.data);
-  //     });
-  // }, []);
+  const [id, setId] = useState('NA');
 
   useEffect(() => {
     async function fetchData() {
@@ -33,24 +22,44 @@ function App() {
 
   console.log(users);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await fetch(
-  //       "https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers"
-  //     );
-  //     console.log(result);
-  //     // setUsers(result);
-  //   };
-  //   fetchData();
-  // }, []);
+  const view = (id) => {
+    alert(id);
+  };
 
   return (
     <div className="App">
       <ul>
-        {users.map(usr=>(
-          <li key={usr.id}>{usr.name}</li>
+        {users.map((usr) => (
+          <>
+            <li key={usr._id}>{usr.name}</li>
+            <li key={usr._id}>{usr.email}</li>
+            <li key={usr._id}>{usr.createdAt}</li>
+            <li key={usr._id}>{usr.updatedAt}</li>
+          </>
         ))}
       </ul>
+
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>email</td>
+          <td>createdAt</td>
+          <td>updatedAt</td>
+          <td>options</td>
+        </tr>
+        {users.map((usr) => (
+          <tr>
+            <td key={usr._id}>{usr.name}</td>
+            <td key={usr._id}>{usr.email}</td>
+            <td key={usr._id}>{usr.createdAt}</td>
+            <td key={usr._id}>{usr.updatedAt}</td>
+            <td>
+              <button onClick={() => setId(usr._id)}>view</button>
+            </td>
+          </tr>
+        ))}
+      </table>
+      <p>{id}</p>
     </div>
   );
 }

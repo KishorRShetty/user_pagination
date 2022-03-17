@@ -5,7 +5,7 @@ import { getUsers } from "../../action";
 import axios from "axios";
 
 const User = () => {
-  const [listOfUsers, setlistOfUsers] = useState([]);
+  const [usersBE, setUsersBE] = useState([]);
 
   const dispatch = useDispatch();
   //users store from the store
@@ -31,33 +31,19 @@ const User = () => {
     });
   };
 
-  // useEffect(() => {
-  //   dispatch(getUsers())
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
-  //     )
-  //     .then((response) => {
-  //       // axios.get(`https://gorest.co.in/public/v2/posts/100/comments`).then((response)=>{
-  //       setlistOfUsers(response.data);
-  //     });
-  // }, []);
-
   useEffect(() => {
     async function fetchData() {
-      const request = await get(
+      const request = await axios.get(
         `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
       );
-      console.log(request);
+      // console.log(request);
+      setUsersBE(request.data.user);
       return request;
     }
     fetchData();
   }, []);
 
-  console.log(listOfUsers);
+  console.log(usersBE);
 
   return (
     <div className="main">
@@ -70,7 +56,15 @@ const User = () => {
           <th>Action</th>
         </tr>
         {/* logic to get the user */}
-
+        {/* <tr>
+          {usersBE.map((usr) => (
+            <>
+              <td key={usr._id}>{usr.name}</td>
+              <td key={usr._id}>{usr.email}</td>
+              <td key={usr._id}>{usr.createdAt}</td>
+            </>
+          ))}
+        </tr> */}
         <tr>
           <td></td>
           <td></td>
@@ -88,7 +82,12 @@ const User = () => {
 
       <h1>Current Page {page}</h1>
       <h3>users:{users}</h3>
-      <h3>usera:{listOfUsers}</h3>
+      <h3>usera:{usersBE}</h3>
+      <ul>
+        {usersBE.map(usr=>(
+          <li key={usr.id}>{usr.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
