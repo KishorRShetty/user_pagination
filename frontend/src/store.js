@@ -1,7 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { userReducer } from "./Reducer";
 
 const store = configureStore({
-    reducer:{}
+  reducer: {
+    page: userReducer,
+  },
 });
 
 export default store;
