@@ -39,7 +39,7 @@ exports.old_getUsers = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
-  const usersPerPage = 2;
+  const usersPerPage = 5;
   try {
     console.log("called");
     //count User

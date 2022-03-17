@@ -6,6 +6,7 @@ import axios from "axios";
 
 const User = () => {
   const [usersBE, setUsersBE] = useState([]);
+  const [id, setId] = useState('NA');
 
   const dispatch = useDispatch();
   //users store from the store
@@ -47,7 +48,7 @@ const User = () => {
 
   return (
     <div className="main">
-      <table className="userTable">
+      {/* <table className="userTable">
         <tr>
           <th>Name</th>
           <th>Email</th>
@@ -55,16 +56,7 @@ const User = () => {
           <th>Updated At</th>
           <th>Action</th>
         </tr>
-        {/* logic to get the user */}
-        {/* <tr>
-          {usersBE.map((usr) => (
-            <>
-              <td key={usr._id}>{usr.name}</td>
-              <td key={usr._id}>{usr.email}</td>
-              <td key={usr._id}>{usr.createdAt}</td>
-            </>
-          ))}
-        </tr> */}
+        
         <tr>
           <td></td>
           <td></td>
@@ -88,6 +80,29 @@ const User = () => {
           <li key={usr.id}>{usr.name}</li>
         ))}
       </ul>
+      <hr/> */}
+
+      <table className="userTable">
+        <tr>
+          <td>Name</td>
+          <td>email</td>
+          <td>createdAt</td>
+          <td>updatedAt</td>
+          <td>options</td>
+        </tr>
+        {usersBE.map((usr) => (
+          <tr>
+            <td key={usr._id}>{usr.name}</td>
+            <td key={usr._id}>{usr.email}</td>
+            <td key={usr._id}>{usr.createdAt}</td>
+            <td key={usr._id}>{usr.updatedAt}</td>
+            <td>
+              <button onClick={() => setId(usr._id)}>view</button>
+            </td>
+          </tr>
+        ))}
+      </table>
+      <p>{id}</p>
     </div>
   );
 };

@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <ul>
+      {/* <ul>
         {users.map((usr) => (
           <>
             <li key={usr._id}>{usr.name}</li>
@@ -37,7 +37,7 @@ function App() {
             <li key={usr._id}>{usr.updatedAt}</li>
           </>
         ))}
-      </ul>
+      </ul> */}
 
       <table>
         <tr>
