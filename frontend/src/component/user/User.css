@@ -1,3 +1,20 @@
-h2{
-    color:red;
+.main {
+  height: 250px;
+  width: 100vmax;
+  border: 1px solid #dddddd;
+}
+
+.userTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.userTable th {
+  background-color: #dddddd;
+}
+
+.userTable td,
+th {
+  text-align: left;
+  padding: 8px;
 }

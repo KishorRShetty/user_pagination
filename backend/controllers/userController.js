@@ -21,7 +21,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-
 //not included in the routes. early stage getUsers
 exports.old_getUsers = async (req, res) => {
   //implementing pagination
@@ -37,11 +36,14 @@ exports.old_getUsers = async (req, res) => {
       message: "data Error",
     });
   }
-}; 
+};
 
 exports.getUsers = async (req, res) => {
-  const usersPerPage = 2;
+  const usersPerPage = 5;
   try {
+    console.log("called");
+    //count User
+    const userCount = await userModel.countDocuments();
     //find
     const paginatedResults = new Pagination(
       userModel.find(),
@@ -49,10 +51,12 @@ exports.getUsers = async (req, res) => {
     ).pagination(usersPerPage);
     // const user = await userModel.find({}); we're replacing the query with paginated one.
     const user = await paginatedResults.query; //we're returning this in Pagination class. so access the query
-
+    console.log(user);
     res.status(201).json({
       success: true,
       user,
+      userCount,
+      usersPerPage
     });
   } catch (error) {
     res.status(400).json({
