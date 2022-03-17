@@ -101,8 +101,21 @@ const User = () => {
             </td>
           </tr>
         ))}
+        <tr>
+          <td></td>
+          <td></td>
+          <td colSpan={3}>
+            <button onClick={prevPage}>&lt;</button>1 2 3 4
+            <button onClick={nextPage}>&gt;</button>
+            <select>
+              <option>1</option>
+            </select>
+            GoTo
+            <input type="number" min={1} name="pageNo" onChange={goTo} />
+          </td>
+        </tr>
       </table>
-      <p>{id}</p>
+      <p>{id}</p> <h4>Current Page {page}</h4>
     </div>
   );
 };
