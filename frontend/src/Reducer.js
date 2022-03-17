@@ -52,3 +52,24 @@ export const usersReducer = createReducer(
     },
   }
 );
+
+
+
+//MODIFY
+export const singleUserReducer = createReducer(
+  {users:[]}, //test without it. need to practice more
+  {
+    getAllUsersRequest: (state) => {
+      state.loading = true;
+      console.log('request');
+    },
+    getAllUsersSuccess: (state, action) => {
+      state.loading = false;
+      state.users = action.payload.user;
+      state.userCount=action.payload.userCount;
+      state.usersPerPage=action.payload.usersPerPage;
+      console.log('success');
+      console.log(state.users);
+    }
+  }
+);
