@@ -1,6 +1,6 @@
 import "./App.css";
 import User from "./component/user/User";
-import Register from "./component/register/Register";
+import Register from "./component/Register/Register";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./component/Header/Header";
 
@@ -9,8 +9,8 @@ function App() {
     <>
       <Router>
         <nav className="header">
+          <Link to="/">User </Link>
           <Link to="register">Register</Link>
-          <Link to="/">User</Link>
         </nav>
         <Routes>
           <Route path="/" element={<User />} />
