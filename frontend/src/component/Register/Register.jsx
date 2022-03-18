@@ -9,7 +9,7 @@ function Register() {
     axios.post("https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/register", { name: name, email: email }).then((response) => {
       alert("userCreated");
       console.log()
-    }).catch((error)=>{alert('error')});
+    }).catch((error)=>{alert(error)});
   };
 
 

@@ -1,12 +1,15 @@
 import React from "react";
-import {Router,Link} from "react-router-dom";
+import "./Header.css";
+import { Router, Link } from "react-router-dom";
 
 function Header() {
   return (
-    <Router>
-      <Link to="register">Register</Link>
-      <Link to="/">User</Link>
-    </Router>
+    <nav className="mainnav-bar">
+      {/* <Router> */}
+      <Link to="/" className="link">User</Link>
+      <Link to="register" className="link">Register</Link>
+      {/* </Router> */}
+    </nav>
   );
 }
 

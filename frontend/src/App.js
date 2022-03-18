@@ -8,10 +8,10 @@ function App() {
   return (
     <>
       <Router>
-        <nav className="header">
-          <Link to="/">User </Link>
-          <Link to="register">Register</Link>
-        </nav>
+          {/* <Link to="/">User </Link>
+          <Link to="register">Register</Link> */}
+          <Header/>
+        <br/>
         <Routes>
           <Route path="/" element={<User />} />
           <Route path="/register" element={<Register />} />

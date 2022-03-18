@@ -14,12 +14,20 @@ const User = () => {
   const [name, setName] = useState("");
   const [pg, setPg] = useState(1);
 
+  // const uCount = userCount / 5;
+
   const nextPg = () => {
-    setPg(pg + 1);
+    // setPg(pg + 1);
+    pg <= uCount ? setPg(uCount) : setPg(pg + 1);
   };
+  // let a = [];
+  //   for (let index = 1; index <= (userCount/5); index++) {
+  //     a.push(index)
+  //   }
+  // alert(a);
 
   const prevPg = () => {
-    setPg(pg - 1);
+    pg <= 1 ? setPg(1) : setPg(pg - 1);
   };
 
   //users store from the store
@@ -28,6 +36,7 @@ const User = () => {
     (state) => state.usersState
   ); //users from redux custom store
   // const params = useParams();
+  const uCount = userCount / 5;
 
   useEffect(() => {
     dispatch(getUsers(pg));
@@ -43,14 +52,8 @@ const User = () => {
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
     dispatch(updateSingleUser(id, name, email, Date.now()));
-
     console.log(`from Update FE: id: ${id}, name: ${name}, email:${email}`);
-    // createUser();
-    // update here
     dispatch({ type: "getAllUsersRequest" });
-    // dispatch({
-    //   type: "prevPage",
-    // });
   };
 
   const prevPage = () => {
@@ -123,9 +126,9 @@ const User = () => {
 
         <table className="userTable">
           <tbody>
-            <tr>
-              <td>Name</td>
-              <td>email</td>
+            <tr className="heading">
+              <td style={{width:"20%"}}>Name</td>
+              <td style={{width:"20%"}}>email</td>
               <td>createdAt</td>
               <td>updatedAt</td>
               <td>options</td>
@@ -144,26 +147,23 @@ const User = () => {
                       setName(usr.name);
                       setEmail(usr.email);
                     }}
+                    className="btn"
                   >
                     view
                   </button>
                 </td>
               </tr>
             ))}
-            <tr>
-              <td>
-                Page: {page}
-                {pg}
-              </td>
+            <tr className="last-row">
+              <td>{/* {page} */}</td>
               <td>Total: {userCount}</td>
               <td colSpan={3}>
                 {/* <button onClick={prevPage}>&lt;</button>1 2 3 4 */}
-                <button onClick={prevPg}>&lt;</button>1 2 3 4
+                <button onClick={prevPg}>&lt;</button>
                 {/* <button onClick={nextPage}>&gt;</button> */}
+                Page: {pg}
                 <button onClick={nextPg}>&gt;</button>
-                <select>
-                  <option>1</option>
-                </select>
+                <select>{/* <option>1</option> */}</select>
                 GoTo
                 <input type="number" min={1} name="pageNo" onChange={goTo} />
               </td>
