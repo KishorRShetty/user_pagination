@@ -127,8 +127,8 @@ const User = () => {
         <table className="userTable">
           <tbody>
             <tr className="heading">
-              <td style={{width:"20%"}}>Name</td>
-              <td style={{width:"20%"}}>email</td>
+              <td style={{ width: "20%" }}>Name</td>
+              <td style={{ width: "20%" }}>email</td>
               <td>createdAt</td>
               <td>updatedAt</td>
               <td>options</td>
@@ -156,15 +156,19 @@ const User = () => {
             ))}
             <tr className="last-row">
               <td>{/* {page} */}</td>
-              <td>Total: {userCount}</td>
+              <td>Total Users: {userCount}</td>
               <td colSpan={3}>
                 {/* <button onClick={prevPage}>&lt;</button>1 2 3 4 */}
-                <button onClick={prevPg}>&lt;</button>
+                <button className="btn-pn" onClick={prevPg}>
+                  &lt;
+                </button>
                 {/* <button onClick={nextPage}>&gt;</button> */}
-                Page: {pg}
-                <button onClick={nextPg}>&gt;</button>
-                <select>{/* <option>1</option> */}</select>
-                GoTo
+                &nbsp;Page: {pg}&nbsp;
+                <button className="btn-pn" onClick={nextPg}>
+                  &gt;
+                </button>
+                &nbsp;<select>{/* <option>1</option> */}</select>&nbsp; GoTo
+                &nbsp;
                 <input type="number" min={1} name="pageNo" onChange={goTo} />
               </td>
             </tr>
@@ -174,9 +178,6 @@ const User = () => {
       <div className={edit ? "visible modal" : "hidden modal"}>
         {/* Test modal <p>{id}</p> */}
         <div className="modal-content">
-          <span className="close" onClick={() => setEdit(false)}>
-            &times;
-          </span>
           <form onSubmit={update}>
             <br />
             Name:{" "}
@@ -195,7 +196,10 @@ const User = () => {
             />
             <br />
             <br />
-            <input type={"submit"} value="update" />
+            <input className="close" type={"submit"} value="update" />
+            <span className="close" onClick={() => setEdit(false)}>
+            {/* &times; */}Close
+          </span>
           </form>
 
           {/* {`Name: ${name} Email: ${email} Id: ${id}`} */}

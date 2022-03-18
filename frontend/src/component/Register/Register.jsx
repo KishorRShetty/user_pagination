@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Register.css";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -21,19 +22,19 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="content">
       <form onSubmit={clicked}>
         <br />
-        Name: <input name="name" />
+        <input name="name" placeholder="Name" />
         <br />
         <br />
-        Email: <input name="email" />
+        <input name="email" placeholder="Email"/>
         <br />
         <br />
         <input type={"submit"} />
       </form>
 
-      {`Name: ${name} Email: ${email}`}
+      {/* {`Name: ${name} Email: ${email}`} */}
     </div>
   );
 }

@@ -11,7 +11,7 @@ function App() {
           {/* <Link to="/">User </Link>
           <Link to="register">Register</Link> */}
           <Header/>
-        <br/>
+        <br/><br/>
         <Routes>
           <Route path="/" element={<User />} />
           <Route path="/register" element={<Register />} />
