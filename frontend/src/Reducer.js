@@ -4,6 +4,7 @@ const initialState = {
   page: 1, //fetch later
 };
 
+//Not using -> tetsed redux toolkit
 export const pageReducer = createReducer(initialState, {
   nextPage: (state) => {
     state.page += 1;
@@ -61,6 +62,21 @@ export const updateUserReducer = createReducer(
       state.loading = true;
     },
     updateUserSuccess: (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+      console.log(state.users);
+    },
+  }
+);
+
+//register
+export const registerUserReducer = createReducer(
+  {},
+  {
+    registerUserRequest: (state) => {
+      state.loading = true;
+    },
+    registerUserSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload;
       console.log(state.users);

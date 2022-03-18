@@ -36,7 +36,7 @@ const User = () => {
     (state) => state.usersState
   ); //users from redux custom store
   // const params = useParams();
-  const uCount = userCount / 5;
+  const uCount = Math.floor(userCount / 5);
 
   useEffect(() => {
     dispatch(getUsers(pg));

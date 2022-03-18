@@ -45,23 +45,24 @@ export const updateSingleUser =
     }
   };
 
-
-  export const bc_getUsers = () => async (dispatch) => {
-    try {
-      dispatch({ type: "getAllUsersRequest" }); //request
-      console.log(" get All users dispatched");
-      const { data } = await axios.get(
-        `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
-      );
-      dispatch({
-        type: "getAllUsersSuccess",
-        payload: data,
-        // payload: data.user,
-      });
-    } catch (error) {
-      dispatch({
-        type: "getAllUsersFailure",
-        payload: error.response.data.message,
-      });
-    }
-  };
+export const registerSingleUser = (name, email) => async (dispatch) => {
+  try {
+    dispatch({ type: "registerUserRequest" }); //request `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/user/:${user_id}`
+    console.log(`dispatched register with ${name}`);
+    const { data } = await axios.post(
+      `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/register`,
+      { name, email },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    dispatch({
+      type: "registerUserSuccess",
+      payload: data.user,
+      // payload: data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: "registerUserFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
