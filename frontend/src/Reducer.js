@@ -32,20 +32,20 @@ export const usersReducer = createReducer(
   {
     getAllUsersRequest: (state) => {
       state.loading = true;
-      console.log('request');
+      // console.log(' getAllUsersRequest reducer request');
     },
     getAllUsersSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload.user;
       state.userCount=action.payload.userCount;
       state.usersPerPage=action.payload.usersPerPage;
-      console.log('success');
-      console.log(state.users);
+      // console.log('getAllUsersRequest reducer success');
+      // console.log(state.users);
     },
     getAllUsersFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      console.log('failed')
+      // console.log('getAllUsersRequest reducer failed')
     },
     clearErrors: (state) => {
       state.error = null;
@@ -56,19 +56,15 @@ export const usersReducer = createReducer(
 
 
 //MODIFY
-export const singleUserReducer = createReducer(
-  {users:[]}, //test without it. need to practice more
+export const updateUserReducer = createReducer(
+  {},
   {
-    getAllUsersRequest: (state) => {
-      state.loading = true;
-      console.log('request');
+    updateUserRequest: (state) => {
+      state.loading=true;
     },
-    getAllUsersSuccess: (state, action) => {
+    updateUserSuccess: (state, action) => {
       state.loading = false;
-      state.users = action.payload.user;
-      state.userCount=action.payload.userCount;
-      state.usersPerPage=action.payload.usersPerPage;
-      console.log('success');
+      state.users = action.payload;
       console.log(state.users);
     }
   }

@@ -83,7 +83,9 @@ exports.getSingleUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   //update
+  console.log(`update user called with ${typeof(req.params.id)} ${req.params.id}`)
   let user = await userModel.findById(req.params.id);
+  console.log(user);
   if (!user) {
     res.status(400).json({
       success: false,

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./User.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../action";
+import { getUsers, updateSingleUser } from "../../action";
 import axios from "axios";
 
 const User = () => {
   const [usersBE, setUsersBE] = useState([]);
-  const [id, setId] = useState("NA");
+  const [id, setId] = useState("");
   const [edit, setEdit] = useState(false); //editmodal
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -15,6 +15,9 @@ const User = () => {
     e.preventDefault();
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
+    dispatch(updateSingleUser(id, name, email));
+
+    console.log(`id: ${id}, name: ${name}, email:${email}`);
     // createUser();
     // update here
   };
@@ -64,7 +67,7 @@ const User = () => {
   }, [dispatch]);
 
   console.log(`userBE ` + usersBE);
-  console.log(`state.user` + users);
+  console.log(`useEffect: state.user` + users);
   console.log(users);
 
   return (
@@ -105,60 +108,70 @@ const User = () => {
       <hr/> */}
 
         <table className="userTable">
-          <tr>
-            <td>Name</td>
-            <td>email</td>
-            <td>createdAt</td>
-            <td>updatedAt</td>
-            <td>options</td>
-          </tr>
-          {users.map((usr) => (
+          <tbody>
             <tr>
-              <td key={usr._id}>{usr.name}</td>
-              <td key={usr._id}>{usr.email}</td>
-              <td key={usr._id}>{usr.createdAt}</td>
-              <td key={usr._id}>{usr.updatedAt}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    setId(usr._id);
-                    setEdit(true);
-                    setName(usr.name);
-                    setEmail(usr.email);
-                  }}
-                >
-                  view
-                </button>
+              <td>Name</td>
+              <td>email</td>
+              <td>createdAt</td>
+              <td>updatedAt</td>
+              <td>options</td>
+            </tr>
+            {users.map((usr) => (
+              <tr key={usr._id}>
+                <td>{usr.name}</td>
+                <td>{usr.email}</td>
+                <td>{usr.createdAt}</td>
+                <td>{usr.updatedAt}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      setId(usr._id);
+                      setEdit(true);
+                      setName(usr.name);
+                      setEmail(usr.email);
+                    }}
+                  >
+                    view
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td>Page: {page}</td>
+              <td>Total: {userCount}</td>
+              <td colSpan={3}>
+                <button onClick={prevPage}>&lt;</button>1 2 3 4
+                <button onClick={nextPage}>&gt;</button>
+                <select>
+                  <option>1</option>
+                </select>
+                GoTo
+                <input type="number" min={1} name="pageNo" onChange={goTo} />
               </td>
             </tr>
-          ))}
-          <tr>
-            <td>Page: {page}</td>
-            <td>Total: {userCount}</td>
-            <td colSpan={3}>
-              <button onClick={prevPage}>&lt;</button>1 2 3 4
-              <button onClick={nextPage}>&gt;</button>
-              <select>
-                <option>1</option>
-              </select>
-              GoTo
-              <input type="number" min={1} name="pageNo" onChange={goTo} />
-            </td>
-          </tr>
+          </tbody>
         </table>
       </div>
       <div className={edit ? "visible modal" : "hidden modal"}>
         {/* Test modal <p>{id}</p> */}
-        <div class="modal-content">
-          <span class="close" onClick={() => setEdit(false)}>
-            &times;
-          </span>
+        <div className="modal-content">
+          <span className="close" onClick={() => setEdit(false)}>&times;</span>
           <form onSubmit={update}>
             <br />
-            Name: <input name="name" value={name} />
+            Name:{" "}
+            <input
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <br />
             <br />
-            Email: <input name="email" value={email} />
+            Email:{" "}
+            <input
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <br />
             <br />
             <input type={"submit"} value="update" />
