@@ -12,6 +12,15 @@ const User = () => {
   const [edit, setEdit] = useState(false); //editmodal
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [pg, setPg] = useState(1);
+
+  const nextPg = () => {
+    setPg(pg + 1);
+  };
+
+  const prevPg = () => {
+    setPg(pg - 1);
+  };
 
   //users store from the store
   const { page } = useSelector((state) => state.page); //page from redux custom store
@@ -21,14 +30,13 @@ const User = () => {
   // const params = useParams();
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUsers(pg));
     console.log(`inside useEffect` + getUsers());
-  }, [dispatch]);
+  }, [dispatch, pg, edit]);
 
   console.log(`userBE ` + usersBE);
   console.log(`useEffect: state.user` + users);
   console.log(users);
-
 
   const update = (e) => {
     e.preventDefault();
@@ -39,7 +47,7 @@ const User = () => {
     console.log(`from Update FE: id: ${id}, name: ${name}, email:${email}`);
     // createUser();
     // update here
-    dispatch({ type: 'getAllUsersRequest' });
+    dispatch({ type: "getAllUsersRequest" });
     // dispatch({
     //   type: "prevPage",
     // });
@@ -143,11 +151,16 @@ const User = () => {
               </tr>
             ))}
             <tr>
-              <td>Page: {page}</td>
+              <td>
+                Page: {page}
+                {pg}
+              </td>
               <td>Total: {userCount}</td>
               <td colSpan={3}>
-                <button onClick={prevPage}>&lt;</button>1 2 3 4
-                <button onClick={nextPage}>&gt;</button>
+                {/* <button onClick={prevPage}>&lt;</button>1 2 3 4 */}
+                <button onClick={prevPg}>&lt;</button>1 2 3 4
+                {/* <button onClick={nextPage}>&gt;</button> */}
+                <button onClick={nextPg}>&gt;</button>
                 <select>
                   <option>1</option>
                 </select>

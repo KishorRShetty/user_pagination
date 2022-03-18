@@ -1,11 +1,12 @@
 import axios from "axios";
 
-export const getUsers = () => async (dispatch) => {
+export const getUsers = (page) => async (dispatch) => {
   try {
     dispatch({ type: "getAllUsersRequest" }); //request
     console.log(" get All users dispatched");
     const { data } = await axios.get(
-      `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+      `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers?page=${page}`
+      // `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers?page=2`
     );
     dispatch({
       type: "getAllUsersSuccess",
@@ -39,6 +40,27 @@ export const updateSingleUser =
     } catch (error) {
       dispatch({
         type: "updateUserFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+
+  export const bc_getUsers = () => async (dispatch) => {
+    try {
+      dispatch({ type: "getAllUsersRequest" }); //request
+      console.log(" get All users dispatched");
+      const { data } = await axios.get(
+        `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers`
+      );
+      dispatch({
+        type: "getAllUsersSuccess",
+        payload: data,
+        // payload: data.user,
+      });
+    } catch (error) {
+      dispatch({
+        type: "getAllUsersFailure",
         payload: error.response.data.message,
       });
     }
