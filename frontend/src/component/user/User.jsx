@@ -5,30 +5,45 @@ import { getUsers, updateSingleUser } from "../../action";
 import axios from "axios";
 
 const User = () => {
+  const dispatch = useDispatch();
+
   const [usersBE, setUsersBE] = useState([]);
   const [id, setId] = useState("");
   const [edit, setEdit] = useState(false); //editmodal
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  const update = (e) => {
-    e.preventDefault();
-    setName(e.target.name.value);
-    setEmail(e.target.elements.email.value);
-    dispatch(updateSingleUser(id, name, email));
-
-    console.log(`id: ${id}, name: ${name}, email:${email}`);
-    // createUser();
-    // update here
-  };
-
-  const dispatch = useDispatch();
   //users store from the store
   const { page } = useSelector((state) => state.page); //page from redux custom store
   const { error, users, userCount, usersPerPage } = useSelector(
     (state) => state.usersState
   ); //users from redux custom store
   // const params = useParams();
+
+  useEffect(() => {
+    dispatch(getUsers());
+    console.log(`inside useEffect` + getUsers());
+  }, [dispatch]);
+
+  console.log(`userBE ` + usersBE);
+  console.log(`useEffect: state.user` + users);
+  console.log(users);
+
+
+  const update = (e) => {
+    e.preventDefault();
+    setName(e.target.name.value);
+    setEmail(e.target.elements.email.value);
+    dispatch(updateSingleUser(id, name, email, Date.now()));
+
+    console.log(`from Update FE: id: ${id}, name: ${name}, email:${email}`);
+    // createUser();
+    // update here
+    dispatch({ type: 'getAllUsersRequest' });
+    // dispatch({
+    //   type: "prevPage",
+    // });
+  };
 
   const prevPage = () => {
     dispatch({
@@ -60,15 +75,6 @@ const User = () => {
   //   }
   //   fetchData();
   // }, []);
-
-  useEffect(() => {
-    dispatch(getUsers());
-    console.log(`inside useEffect` + getUsers());
-  }, [dispatch]);
-
-  console.log(`userBE ` + usersBE);
-  console.log(`useEffect: state.user` + users);
-  console.log(users);
 
   return (
     <>
@@ -155,7 +161,9 @@ const User = () => {
       <div className={edit ? "visible modal" : "hidden modal"}>
         {/* Test modal <p>{id}</p> */}
         <div className="modal-content">
-          <span className="close" onClick={() => setEdit(false)}>&times;</span>
+          <span className="close" onClick={() => setEdit(false)}>
+            &times;
+          </span>
           <form onSubmit={update}>
             <br />
             Name:{" "}

@@ -28,7 +28,7 @@ export const pageReducer = createReducer(initialState, {
 });
 
 export const usersReducer = createReducer(
-  {users:[]}, //test without it. need to practice more
+  { users: [] }, //test without it. need to practice more
   {
     getAllUsersRequest: (state) => {
       state.loading = true;
@@ -37,8 +37,8 @@ export const usersReducer = createReducer(
     getAllUsersSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload.user;
-      state.userCount=action.payload.userCount;
-      state.usersPerPage=action.payload.usersPerPage;
+      state.userCount = action.payload.userCount;
+      state.usersPerPage = action.payload.usersPerPage;
       // console.log('getAllUsersRequest reducer success');
       // console.log(state.users);
     },
@@ -53,19 +53,17 @@ export const usersReducer = createReducer(
   }
 );
 
-
-
-//MODIFY
+//Update
 export const updateUserReducer = createReducer(
   {},
   {
     updateUserRequest: (state) => {
-      state.loading=true;
+      state.loading = true;
     },
     updateUserSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload;
       console.log(state.users);
-    }
+    },
   }
 );

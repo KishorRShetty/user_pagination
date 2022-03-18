@@ -83,21 +83,21 @@ exports.getSingleUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   //update
-  console.log(`update user called with ${typeof(req.params.id)} ${req.params.id}`)
+  // console.log(`update user called with ${typeof(req.params.id)} ${req.params.id}`)
   let user = await userModel.findById(req.params.id);
-  console.log(user);
   if (!user) {
     res.status(400).json({
       success: false,
       message: "user not found",
     });
   }
-
+  
   user = await userModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   }); // try 3rd par new:true and runVal: this will give the updated value in response
-
+  console.log(user); // res after the update
+  
   res.status(200).json({
     success: true,
     user,
