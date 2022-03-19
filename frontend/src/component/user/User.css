@@ -87,14 +87,14 @@
   font-weight: bold;
   margin: 2px;
   width: 47.5%;
-  color:white
+  color: white;
 }
 
-.btn-red{
+.btn-red {
   background-color: Tomato;
 }
 
-.btn-green{
+.btn-green {
   background-color: MediumSeaGreen;
 }
 
@@ -105,7 +105,7 @@
   padding: 10px;
 }
 
-.modalform{
+.modalform {
   font-size: small;
   font-weight: bold;
 }
@@ -121,7 +121,7 @@
   display: flex;
 }
 
-.paginator{
+.paginator {
   display: flex;
 }
 
@@ -130,7 +130,7 @@
   color: white;
 }
 
-.activepage{
+.activepage {
   background-color: black;
   color: white;
 }

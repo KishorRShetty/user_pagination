@@ -14,7 +14,7 @@ const User = () => {
 
   //pagination bar
   const [pageNumberLimit, setpageNumberLimit] = useState(5); // 5 how many pages on the bar
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(3);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
   //users store from the store
@@ -86,6 +86,24 @@ const User = () => {
     );
     dispatch(updateSingleUser(id, name, email, Date.now()));
   };
+
+  const renderPageNumbers = pageNumbers.map((num) => {
+    if (num < maxPageNumberLimit + 1 && num > minPageNumberLimit) {
+      return (
+        <li
+          key={num}
+          id={num}
+          onClick={handleClick}
+          className={pg === num ? "activepage" : null}
+        >
+          {num}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+
   return (
     <>
       <div className="main">
@@ -131,25 +149,7 @@ const User = () => {
                 <div className="paginator">
                   <ul>
                     <li onClick={prevPg}>&lt;</li>
-                    {pageNumbers.map((num) => {
-                      if (
-                        num < maxPageNumberLimit + 1 &&
-                        num > minPageNumberLimit
-                      ) {
-                        return (
-                          <li
-                            key={num}
-                            id={num}
-                            onClick={handleClick}
-                            className={pg === num ? "activepage" : null}
-                          >
-                            {num}
-                          </li>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+                    {renderPageNumbers}
                     <li onClick={nextPg}>&gt;</li>
                   </ul>
                 </div>
