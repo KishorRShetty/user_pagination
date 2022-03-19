@@ -1,5 +1,5 @@
 #!/bin/bash
  
-echo "Commit info: "
-read x
+read -p "Commit info: " x
+
 git add . && git commit -m ${x} && git push
