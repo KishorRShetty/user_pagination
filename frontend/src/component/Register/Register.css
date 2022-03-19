@@ -9,3 +9,20 @@
     display: flex;
     justify-content: center;
   }
+
+  
+.btn-pn {
+}
+.paginator ul li {
+  /* padding: 5px; */
+  border: 1px solid black;
+  cursor: pointer;
+}
+.paginator ul {
+  list-style: none;
+  display: flex;
+}
+
+/* .paginator{
+  display: flex;
+} */

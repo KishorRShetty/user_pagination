@@ -95,9 +95,24 @@
 }
 
 .btn-pn {
-  height: 30px;
-  width: 30px;
+  /* height: 30px; */
+  /* width: 30px; */
   border: 1px solid black;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   font-weight: bold;
+  padding: 5px;
+}
+.paginator ul li {
+  padding: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.paginator ul {
+  
+  list-style: none;
+  display: flex;
+}
+
+.paginator{
+  display: flex;
 }

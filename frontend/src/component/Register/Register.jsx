@@ -19,7 +19,7 @@ function Register() {
     dispatch(registerSingleUser(name, email));
   };
   
-  return (
+  return (<>
     <div className="content">
       <form onSubmit={register}>
         <br />
@@ -33,8 +33,25 @@ function Register() {
         <input type={"submit"} />
       </form>
 
+      
+
       {/* {`Name: ${name} Email: ${email}`} */}
     </div>
+
+<div className="paginator">
+<span className="btn-pn">
+  &lt;
+</span>
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>4</li>
+</ul>
+<span className="btn-pn">
+  &gt;
+</span>
+</div>
+</>
   );
 }
 

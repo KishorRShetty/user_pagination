@@ -40,7 +40,10 @@ const User = () => {
   for (let i = 1; i <= uCount; i++) {
     pageNumbers.push(i);
   }
-  console.log(`pagge: ${pageNumbers}`);
+  console.log(`pages: ${pageNumbers}`);
+
+  //pagination bar logic
+  // const lastIndex = 
 
   useEffect(() => {
     dispatch(getUsers(pg));
@@ -101,15 +104,19 @@ const User = () => {
                 {pg * 5 > userCount ? userCount : pg * 5} of {userCount}
               </td>
               <td>
-                {/* <button onClick={prevPage}>&lt;</button>1 2 3 4 */}
-                <button className="btn-pn" onClick={prevPg}>
-                  &lt;
-                </button>
-                {/* <button onClick={nextPage}>&gt;</button> */}
-                {/* &nbsp;Page {pg} of {uCount}&nbsp; */}
-                <button className="btn-pn" onClick={nextPg}>
-                  &gt;
-                </button>
+                <div className="paginator">
+                  <button className="btn-pn" onClick={prevPg}>
+                    &lt;
+                  </button>
+                  <ul>
+                    {pageNumbers.map((num) => (
+                      <li key={num}>{num}</li>
+                    ))}
+                  </ul>
+                  <button className="btn-pn" onClick={nextPg}>
+                    &gt;
+                  </button>
+                </div>
               </td>
               <td>
                 <select onChange={gotoPage}>
@@ -136,7 +143,6 @@ const User = () => {
         </table>
       </div>
       <div className={edit ? "visible modal" : "hidden modal"}>
-        {/* Test modal <p>{id}</p> */}
         <div className="modal-content">
           <form onSubmit={update}>
             <br />
