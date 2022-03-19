@@ -1,20 +1,19 @@
 import axios from "axios";
 
 
-//not using it. experimental
 export const getUsers = (page) => async (dispatch) => {
   try {
     dispatch({ type: "getAllUsersRequest" }); //request
     console.log(" get All users dispatched");
     const { data } = await axios.get(
       `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers?page=${page}`
-      // `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/allUsers?page=2`
     );
     dispatch({
       type: "getAllUsersSuccess",
       payload: data,
       // payload: data.user,
     });
+    // alert('users data retrieved');
   } catch (error) {
     dispatch({
       type: "getAllUsersFailure",
@@ -39,11 +38,13 @@ export const updateSingleUser =
         payload: data.user,
         // payload: data.user,
       });
+      alert('update success');
     } catch (error) {
       dispatch({
         type: "updateUserFailure",
         payload: error.response.data.message,
       });
+      alert('update failed');
     }
   };
 
@@ -62,11 +63,13 @@ export const registerSingleUser = (name, email) => async (dispatch) => {
       payload: data.user,
       // payload: data.user,
     });
+    alert('register success');
   } catch (error) {
     console.log(error);
     dispatch({
       type: "registerUserFailure",
       payload: error.response.data.message,
     });
+    alert('register failed: user already exist');
   }
 };

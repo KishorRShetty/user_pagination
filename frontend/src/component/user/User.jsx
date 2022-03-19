@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./User.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, updateSingleUser } from "../../action";
-import axios from "axios";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -13,8 +12,14 @@ const User = () => {
   const [name, setName] = useState("");
   const [pg, setPg] = useState(1);
 
-  // const uCount = userCount / 5;
+  //users store from the store
+  const { error, users, userCount, usersPerPage } = useSelector(
+    (state) => state.usersState
+  ); //users from redux custom store
+  // const params = useParams();
+  const uCount = Math.ceil(userCount / 5);
 
+  // const uCount = userCount / 5;
   const nextPg = () => {
     // setPg(pg + 1);
     pg >= uCount ? setPg(uCount) : setPg(pg + 1);
@@ -29,13 +34,6 @@ const User = () => {
     console.log(e.target.value);
     setPg(e.target.value);
   };
-
-  //users store from the store
-  const { error, users, userCount, usersPerPage } = useSelector(
-    (state) => state.usersState
-  ); //users from redux custom store
-  // const params = useParams();
-  const uCount = Math.ceil(userCount / 5);
 
   // for pages
   const pageNumbers = [];
@@ -102,17 +100,18 @@ const User = () => {
                 {pg > 1 ? 5 * (pg - 1) : 1} to{" "}
                 {pg * 5 > userCount ? userCount : pg * 5} of {userCount}
               </td>
-              <td colSpan={3}>
+              <td>
                 {/* <button onClick={prevPage}>&lt;</button>1 2 3 4 */}
                 <button className="btn-pn" onClick={prevPg}>
                   &lt;
                 </button>
                 {/* <button onClick={nextPage}>&gt;</button> */}
-                &nbsp;Page {pg} of {uCount}&nbsp;
+                {/* &nbsp;Page {pg} of {uCount}&nbsp; */}
                 <button className="btn-pn" onClick={nextPg}>
                   &gt;
                 </button>
-                &nbsp;
+              </td>
+              <td>
                 <select onChange={gotoPage}>
                   {pageNumbers.map((num) => (
                     <option key={num}>{num}</option>
@@ -126,6 +125,11 @@ const User = () => {
                   onBlur={gotoPage}
                   name="pageNo"
                 />
+              </td>
+              <td>
+                <span style={{ fontSize: "small" }}>
+                  &nbsp;Page {pg}/{uCount}&nbsp;
+                </span>
               </td>
             </tr>
           </tbody>
