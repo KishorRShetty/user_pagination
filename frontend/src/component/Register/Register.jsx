@@ -15,36 +15,19 @@ function Register() {
     e.preventDefault();
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
+    console.log(`from register  before dispathch from form: name: ${name}, email:${email}`);
     dispatch(registerSingleUser(name, email));
-    console.log(`from register FE: id: name: ${name}, email:${email}`);
-    
   };
   
-  //remove after redux
-  const createUser = () => {
-    axios.post("https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/register", { name: name, email: email }).then((response) => {
-      alert("userCreated");
-      console.log()
-    }).catch((error)=>{alert(error)});
-  };
-
-//remove after redux
-  const clicked = (e) => {
-    e.preventDefault();
-    setName(e.target.name.value);
-    setEmail(e.target.elements.email.value);
-    createUser();
-  };
-
-
   return (
     <div className="content">
       <form onSubmit={register}>
         <br />
-        <input name="name" placeholder="Name" />
+        {/* remove later */}
+        <input name="name" onChange={(e) => setName(e.target.value)} placeholder="Name" />
         <br />
         <br />
-        <input name="email" placeholder="Email"/>
+        <input name="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
         <br />
         <br />
         <input type={"submit"} />

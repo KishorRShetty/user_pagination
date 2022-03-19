@@ -3,7 +3,7 @@ const Pagination = require("../pagination");
 
 exports.registerUser = async (req, res) => {
   try {
-    console.log(`register Called with name ${req.body.name} and email ${req.body.email} body: ${JSON.parse(req.body)}`);
+    // console.log(`register Called with name ${req.body.name} and email ${req.body.email}`);
     const user = await userModel.create(req.body);
     // we can also use const us = new userModel(user) and await us.save()
     //get data from the body

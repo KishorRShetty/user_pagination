@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+//not using it. experimental
 export const getUsers = (page) => async (dispatch) => {
   try {
     dispatch({ type: "getAllUsersRequest" }); //request
@@ -24,7 +26,7 @@ export const getUsers = (page) => async (dispatch) => {
 export const updateSingleUser =
   (user_id, name, email, updatedAt) => async (dispatch) => {
     try {
-      dispatch({ type: "updateUserRequest" }); //request `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/user/:${user_id}`
+      dispatch({ type: "updateUserRequest" });
       console.log(`dispatched update with ${user_id}`);
       console.log(`data in action: ${user_id} ${name} ${email} ${updatedAt}`);
       const { data } = await axios.put(
@@ -47,19 +49,21 @@ export const updateSingleUser =
 
 export const registerSingleUser = (name, email) => async (dispatch) => {
   try {
-    dispatch({ type: "registerUserRequest" }); //request `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/user/:${user_id}`
-    console.log(`dispatched register with ${name}`);
+    dispatch({ type: "registerUserRequest" });
+    console.log(`dispatched register with name: ${name}, email: ${email}`);
     const { data } = await axios.post(
       `https://4990-gitlabyoha-serversidedpa-ch53nzxy9de.ws-us38.gitpod.io/api/v1/register`,
       { name, email },
       { headers: { "Content-Type": "application/json" } }
     );
+    console.log(data);
     dispatch({
       type: "registerUserSuccess",
       payload: data.user,
       // payload: data.user,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: "registerUserFailure",
       payload: error.response.data.message,
