@@ -80,11 +80,22 @@
 }
 .close {
   cursor: pointer;
-  border: 1px solid black;
+  border: none;
   padding: 10px;
   background-color: #e7e7e7;
-  border-radius: 5px;
-  font-size: medium;
+  font-size: small;
+  font-weight: bold;
+  margin: 2px;
+  width: 47.5%;
+  color:white
+}
+
+.btn-red{
+  background-color: Tomato;
+}
+
+.btn-green{
+  background-color: MediumSeaGreen;
 }
 
 .btn {
@@ -92,6 +103,11 @@
   background-color: #e7e7e7;
   cursor: pointer;
   padding: 10px;
+}
+
+.modalform{
+  font-size: small;
+  font-weight: bold;
 }
 
 .paginator ul li {

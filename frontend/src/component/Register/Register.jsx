@@ -40,7 +40,7 @@ function Register() {
           />
           <br />
           <br />
-          <input type={"submit"} />
+          <input className="btn-green close" type={"submit"} />
         </form>
 
         {/* {`Name: ${name} Email: ${email}`} */}

@@ -43,7 +43,7 @@ const User = () => {
   console.log(`pages: ${pageNumbers}`);
 
   //pagination bar logic
-  // const lastIndex = 
+  const lastIndex = 
 
   useEffect(() => {
     dispatch(getUsers(pg));
@@ -144,9 +144,9 @@ const User = () => {
       </div>
       <div className={edit ? "visible modal" : "hidden modal"}>
         <div className="modal-content">
-          <form onSubmit={update}>
+          <form onSubmit={update} className="modalform">
             <br />
-            Name:{" "}
+            Name<br/>
             <input
               name="name"
               value={name}
@@ -154,7 +154,7 @@ const User = () => {
             />
             <br />
             <br />
-            Email:{" "}
+            Email<br/>
             <input
               name="email"
               value={email}
@@ -162,10 +162,10 @@ const User = () => {
             />
             <br />
             <br />
-            <input className="close" type={"submit"} value="update" />
-            <span className="close" onClick={() => setEdit(false)}>
+            <input className="close btn-green" type={"submit"} value="update" />
+            <button className="close btn-red" onClick={() => setEdit(false)}>
               {/* &times; */}Close
-            </span>
+            </button>
           </form>
 
           {/* {`Name: ${name} Email: ${email} Id: ${id}`} */}
