@@ -18,7 +18,7 @@ const User = () => {
 
   const nextPg = () => {
     // setPg(pg + 1);
-    pg <= uCount ? setPg(uCount) : setPg(pg + 1);
+    pg >= uCount ? setPg(uCount) : setPg(pg + 1);
   };
   // let a = [];
   //   for (let index = 1; index <= (userCount/5); index++) {
