@@ -1,12 +1,23 @@
 import "./App.css";
 import User from "./component/user/User";
+import Register from "./component/Register/Register";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Header from "./component/Header/Header";
 
 function App() {
   return (
     <>
-      <nav className="header">
-        <h1>User Pagination</h1> <User />
-      </nav>
+      <Router>
+          {/* <Link to="/">User </Link>
+          <Link to="register">Register</Link> */}
+          <Header/>
+        <br/><br/>
+        <Routes>
+          <Route path="/" element={<User />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
+      {/* <User /> */}
     </>
   );
 }

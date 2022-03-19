@@ -1,20 +1,100 @@
 .main {
-  height: 250px;
-  width: 100vmax;
+  height: 500px;
+  width: 100%;
   border: 1px solid #dddddd;
 }
 
 .userTable {
   border-collapse: collapse;
+  height: 500px;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  table-layout: fixed;
+}
+
+.userTable tbody {
+  display: table;
   width: 100%;
 }
 
-.userTable th {
-  background-color: #dddddd;
+.heading {
+  background-color: #ddddddb4;
+  font-weight: bold;
 }
 
-.userTable td,
-th {
+.userTable td {
   text-align: left;
-  padding: 8px;
+  padding: 15px;
+}
+
+.userTable tr:hover {
+  background-color: #ddddddb4;
+}
+
+.uicon{
+  border: 1px solid black;
+  border-radius: 5%;
+  text-transform: capitalize;
+  /* auto background */
+  /* background-color: aqua; */
+  padding: 10px;
+  font-weight: bold;
+}
+
+.last-row {
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.modal {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  border: 1px solid black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  /* background-color: rgb(0,0,0); */
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  width: 80%;
+  height: auto;
+  margin: 25% auto;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+.close {
+  cursor: pointer;
+  border:1px solid black;
+  padding: 10px;
+  background-color: #e7e7e7;
+  border-radius: 5px;
+  font-size: medium;
+}
+
+.btn {
+  border: 1px solid white;
+  background-color: #e7e7e7;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.btn-pn {
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-weight: bold;
 }

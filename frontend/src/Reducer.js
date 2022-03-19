@@ -4,6 +4,7 @@ const initialState = {
   page: 1, //fetch later
 };
 
+//Not using -> tetsed redux toolkit
 export const pageReducer = createReducer(initialState, {
   nextPage: (state) => {
     state.page += 1;
@@ -28,27 +29,57 @@ export const pageReducer = createReducer(initialState, {
 });
 
 export const usersReducer = createReducer(
-  {users:[]},
+  { users: [] }, //test without it. need to practice more
   {
     getAllUsersRequest: (state) => {
       state.loading = true;
-      console.log('request');
+      // console.log(' getAllUsersRequest reducer request');
     },
     getAllUsersSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload.user;
-      state.userCount=action.payload.userCount;
-      state.usersPerPage=action.payload.usersPerPage;
-      console.log('success');
-      console.log(state.users);
+      state.userCount = action.payload.userCount;
+      state.usersPerPage = action.payload.usersPerPage;
+      // console.log('getAllUsersRequest reducer success');
+      // console.log(state.users);
     },
     getAllUsersFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      console.log('failed')
+      // console.log('getAllUsersRequest reducer failed')
     },
     clearErrors: (state) => {
       state.error = null;
+    },
+  }
+);
+
+//Update
+export const updateUserReducer = createReducer(
+  {},
+  {
+    updateUserRequest: (state) => {
+      state.loading = true;
+    },
+    updateUserSuccess: (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+      console.log(state.users);
+    },
+  }
+);
+
+//register
+export const registerUserReducer = createReducer(
+  {},
+  {
+    registerUserRequest: (state) => {
+      state.loading = true;
+    },
+    registerUserSuccess: (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+      console.log(state.users);
     },
   }
 );
