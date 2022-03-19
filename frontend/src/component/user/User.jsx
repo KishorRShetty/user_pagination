@@ -12,6 +12,11 @@ const User = () => {
   const [name, setName] = useState("");
   const [pg, setPg] = useState(1);
 
+  //pagination bar
+  const [pageNumberLimit, setpageNumberLimit] = useState(5); // 5 how many pages on the bar
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+
   //users store from the store
   const { error, users, userCount, usersPerPage } = useSelector(
     (state) => state.usersState
@@ -23,10 +28,23 @@ const User = () => {
   const nextPg = () => {
     // setPg(pg + 1);
     pg >= uCount ? setPg(uCount) : setPg(pg + 1);
+
+    //paginator bar
+
+    if (pg + 1 > maxPageNumberLimit) {
+      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
   };
 
   const prevPg = () => {
     pg <= 1 ? setPg(1) : setPg(pg - 1);
+
+    //paginator bar
+    if ((pg + 1) % pageNumberLimit === 0) {
+      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
   };
 
   const gotoPage = (e) => {
@@ -113,16 +131,25 @@ const User = () => {
                 <div className="paginator">
                   <ul>
                     <li onClick={prevPg}>&lt;</li>
-                    {pageNumbers.map((num) => (
-                      <li
-                        key={num}
-                        id={num}
-                        onClick={handleClick}
-                        className={pg == num ? "activepage" : null}
-                      >
-                        {num}
-                      </li>
-                    ))}
+                    {pageNumbers.map((num) => {
+                      if (
+                        num < maxPageNumberLimit + 1 &&
+                        num > minPageNumberLimit
+                      ) {
+                        return (
+                          <li
+                            key={num}
+                            id={num}
+                            onClick={handleClick}
+                            className={pg === num ? "activepage" : null}
+                          >
+                            {num}
+                          </li>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
                     <li onClick={nextPg}>&gt;</li>
                   </ul>
                 </div>
