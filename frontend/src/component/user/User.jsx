@@ -24,6 +24,12 @@ const User = () => {
     pg <= 1 ? setPg(1) : setPg(pg - 1);
   };
 
+  const gotoPage = (e) => {
+    if (e.target.value > uCount || e.target.value < 1) return false;
+    console.log(e.target.value);
+    setPg(e.target.value);
+  };
+
   //users store from the store
   const { error, users, userCount, usersPerPage } = useSelector(
     (state) => state.usersState
@@ -106,9 +112,20 @@ const User = () => {
                 <button className="btn-pn" onClick={nextPg}>
                   &gt;
                 </button>
-                &nbsp;<select>{/* <option>1</option> */}</select>&nbsp; GoTo
                 &nbsp;
-                <input type="number" min={1} name="pageNo" />
+                <select onChange={gotoPage}>
+                  {pageNumbers.map((num) => (
+                    <option key={num}>{num}</option>
+                  ))}
+                </select>
+                &nbsp; GoTo &nbsp;
+                <input
+                  type="Number"
+                  min={1}
+                  max={uCount}
+                  onBlur={gotoPage}
+                  name="pageNo"
+                />
               </td>
             </tr>
           </tbody>
