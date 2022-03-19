@@ -42,8 +42,10 @@ const User = () => {
   }
   console.log(`pages: ${pageNumbers}`);
 
-  //pagination bar logic
-  const lastIndex = 
+  //pagination BAR logic
+  // const lastIndex = pg * 5; //current page * users per page 1*5=5, 2*5=10
+  // const firstIndex = lastIndex-5; // 5-5=0 10-5=5 => (0,5) - (5-10)
+  // const currentUsers =
 
   useEffect(() => {
     dispatch(getUsers(pg));
@@ -52,6 +54,10 @@ const User = () => {
 
   console.log(`useEffect: state.user` + users);
   console.log(users);
+
+  const handleClick = (e) => {
+    setPg(Number(e.target.id));
+  };
 
   const update = (e) => {
     e.preventDefault();
@@ -106,15 +112,18 @@ const User = () => {
               <td>
                 <div className="paginator">
                   <ul>
-                  <li onClick={prevPg}>
-                    &lt;
-                  </li>
+                    <li onClick={prevPg}>&lt;</li>
                     {pageNumbers.map((num) => (
-                      <li key={num}>{num}</li>
+                      <li
+                        key={num}
+                        id={num}
+                        onClick={handleClick}
+                        className={pg == num ? "activepage" : null}
+                      >
+                        {num}
+                      </li>
                     ))}
-                    <li onClick={nextPg}>
-                    &gt;
-                  </li>
+                    <li onClick={nextPg}>&gt;</li>
                   </ul>
                 </div>
               </td>
@@ -146,7 +155,8 @@ const User = () => {
         <div className="modal-content">
           <form onSubmit={update} className="modalform">
             <br />
-            Name<br/>
+            Name
+            <br />
             <input
               name="name"
               value={name}
@@ -154,7 +164,8 @@ const User = () => {
             />
             <br />
             <br />
-            Email<br/>
+            Email
+            <br />
             <input
               name="email"
               value={email}

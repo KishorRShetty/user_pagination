@@ -111,8 +111,8 @@
 }
 
 .paginator ul li {
-  padding: 10px;
-  border: 0.5px solid rgba(0, 0, 0, 0.685);
+  padding: 15px;
+  border: 0.2px solid rgba(0, 0, 0, 0.685);
   cursor: pointer;
 }
 .paginator ul {
@@ -126,5 +126,11 @@
 }
 
 .paginator ul li:hover {
-  background-color: white;
+  background-color: DodgerBlue;
+  color: white;
+}
+
+.activepage{
+  background-color: black;
+  color: white;
 }
