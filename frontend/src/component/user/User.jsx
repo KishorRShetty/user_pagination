@@ -105,17 +105,17 @@ const User = () => {
               </td>
               <td>
                 <div className="paginator">
-                  <button className="btn-pn" onClick={prevPg}>
-                    &lt;
-                  </button>
                   <ul>
+                  <li onClick={prevPg}>
+                    &lt;
+                  </li>
                     {pageNumbers.map((num) => (
                       <li key={num}>{num}</li>
                     ))}
-                  </ul>
-                  <button className="btn-pn" onClick={nextPg}>
+                    <li onClick={nextPg}>
                     &gt;
-                  </button>
+                  </li>
+                  </ul>
                 </div>
               </td>
               <td>

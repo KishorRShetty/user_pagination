@@ -94,21 +94,13 @@
   padding: 10px;
 }
 
-.btn-pn {
-  /* height: 30px; */
-  /* width: 30px; */
-  border: 1px solid black;
-  /* border-radius: 50%; */
-  font-weight: bold;
-  padding: 5px;
-}
 .paginator ul li {
   padding: 5px;
   border: 1px solid black;
   cursor: pointer;
 }
 .paginator ul {
-  
+  padding: 0;
   list-style: none;
   display: flex;
 }

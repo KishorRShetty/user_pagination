@@ -10,48 +10,42 @@ function Register() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  
   const register = (e) => {
     e.preventDefault();
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
-    console.log(`from register  before dispathch from form: name: ${name}, email:${email}`);
+    console.log(
+      `from register  before dispathch from form: name: ${name}, email:${email}`
+    );
     dispatch(registerSingleUser(name, email));
   };
-  
-  return (<>
-    <div className="content">
-      <form onSubmit={register}>
-        <br />
-        {/* remove later */}
-        <input name="name" onChange={(e) => setName(e.target.value)} placeholder="Name" />
-        <br />
-        <br />
-        <input name="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
-        <br />
-        <br />
-        <input type={"submit"} />
-      </form>
 
-      
+  return (
+    <>
+      <div className="content">
+        <form onSubmit={register}>
+          <br />
+          {/* remove later */}
+          <input
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+          />
+          <br />
+          <br />
+          <input
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+          <br />
+          <br />
+          <input type={"submit"} />
+        </form>
 
-      {/* {`Name: ${name} Email: ${email}`} */}
-    </div>
-
-<div className="paginator">
-<span className="btn-pn">
-  &lt;
-</span>
-<ul>
-  <li>1</li>
-  <li>2</li>
-  <li>4</li>
-</ul>
-<span className="btn-pn">
-  &gt;
-</span>
-</div>
-</>
+        {/* {`Name: ${name} Email: ${email}`} */}
+      </div>
+    </>
   );
 }
 
