@@ -1,12 +1,12 @@
 .main {
-  height: 500px;
+  height: 530px;
   width: 100%;
   border: 1px solid #dddddd;
 }
 
 .userTable {
   border-collapse: collapse;
-  height: 500px;
+  height: 530px;
   width: 100%;
   display: block;
   overflow-x: auto;
