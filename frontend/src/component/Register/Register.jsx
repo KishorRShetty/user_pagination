@@ -10,10 +10,10 @@ function Register() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  const [errorState, setErrorState] = useState();
+  const [show, setShow] = useState(false);
+  const [snackMsg, setsnackMsg] = useState("");
 
   const { message, error } = useSelector((state) => state.registerUserState);
-  // setErrorState(alerts);
 
   const register = (e) => {
     e.preventDefault();
@@ -25,15 +25,26 @@ function Register() {
     dispatch(registerSingleUser(name, email));
   };
 
+  const showSnackbar = (msg) => {
+    setShow(true);
+    setTimeout(() => {
+      setShow(false);
+    }, 3000);
+  };
+
   useEffect(() => {
     if (error) {
       console.log(error);
-      dispatch({type:'clearErrors'})
+      setsnackMsg(error);
+      showSnackbar();
+      dispatch({ type: "clearErrors" });
     }
 
     if (message) {
       console.log(message);
-      dispatch({type:'clearErrors'})
+      setsnackMsg(message);
+      showSnackbar();
+      dispatch({ type: "clearMessage" });
     }
   }, [message, error]);
 
@@ -60,7 +71,7 @@ function Register() {
           <input className="btn-green close" type={"submit"} />
         </form>
         <span>
-          ALerts: {message} {error}
+          {show ? snackMsg : null}
         </span>
         {/* {`Name: ${name} Email: ${email}`} */}
       </div>
