@@ -38,6 +38,7 @@ const User = () => {
   };
 
   const prevPg = () => {
+    // setPg(pg - 1);
     pg <= 1 ? setPg(1) : setPg(pg - 1);
 
     //paginator bar
@@ -67,10 +68,9 @@ const User = () => {
 
   useEffect(() => {
     dispatch(getUsers(pg));
-    console.log(`inside useEffect` + getUsers());
   }, [dispatch, pg, edit]);
 
-  console.log(`useEffect: state.user` + users);
+  // console.log(`useEffect: state.user` + users);
   console.log(users);
 
   const handleClick = (e) => {
@@ -164,7 +164,7 @@ const User = () => {
                 <input
                   type="Number"
                   min={1}
-                  max={uCount}
+                  max={Number(uCount)}
                   onBlur={gotoPage}
                   name="pageNo"
                 />

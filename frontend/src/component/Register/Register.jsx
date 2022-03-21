@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Register.css";
 import { useDispatch, useSelector } from "react-redux";
-import { registerSingleUser } from "../../action";
+import { registerSingleUser, reg } from "../../action";
 
 function Register() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  const [errorState, setErrorState] = useState();
+
+  const { message, error } = useSelector((state) => state.registerUserState);
+  // setErrorState(alerts);
 
   const register = (e) => {
     e.preventDefault();
@@ -19,6 +24,18 @@ function Register() {
     );
     dispatch(registerSingleUser(name, email));
   };
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      dispatch({type:'clearErrors'})
+    }
+
+    if (message) {
+      console.log(message);
+      dispatch({type:'clearErrors'})
+    }
+  }, [message, error]);
 
   return (
     <>
@@ -42,7 +59,9 @@ function Register() {
           <br />
           <input className="btn-green close" type={"submit"} />
         </form>
-
+        <span>
+          ALerts: {message} {error}
+        </span>
         {/* {`Name: ${name} Email: ${email}`} */}
       </div>
     </>

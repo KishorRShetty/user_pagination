@@ -63,13 +63,13 @@ export const registerSingleUser = (name, email) => async (dispatch) => {
       payload: data.user,
       // payload: data.user,
     });
-    alert('register success');
+    
   } catch (error) {
     console.log(error);
     dispatch({
       type: "registerUserFailure",
       payload: error.response.data.message,
     });
-    alert('register failed: user already exist');
+    
   }
 };
