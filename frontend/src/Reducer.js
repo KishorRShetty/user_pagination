@@ -64,10 +64,21 @@ export const updateUserReducer = createReducer(
     updateUserSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload;
+      state.message = `Update Success`;
       console.log(state.users);
     },
     clearErrors: (state) => {
       state.error = null;
+    },updateUserFailure: (state, action) => {
+      state.loading = false;
+      //remove if not needed - for testing failed msg
+      state.error = action.payload || 'Update Error';
+    },
+    clearErrors: (state) => {
+      state.error = null;
+    },
+    clearMessage: (state) => {
+      state.message = null;
     },
   }
 );

@@ -44,6 +44,7 @@ export const updateSingleUser =
         type: "updateUserFailure",
         payload: error.response.data.message,
       });
+      console.log(error);
       alert('update failed');
     }
   };

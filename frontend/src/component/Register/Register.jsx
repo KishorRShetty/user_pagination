@@ -77,7 +77,7 @@ function Register() {
         id="snackbar"
         className={
           // show && { ...snackMsg.includes("Error") } ? "show red" : null
-          show ? (snackMsg.includes("Error")) ? "show red" : "show green" : null
+          show ? (snackMsg.includes("Error") ? "show red" : "show green") : null
         }
       >
         {show ? snackMsg : null}
