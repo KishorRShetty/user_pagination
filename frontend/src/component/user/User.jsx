@@ -19,7 +19,7 @@ const User = () => {
 
   //pagination bar
   const [pageNumberLimit, setpageNumberLimit] = useState(5); // 5 how many pages on the bar
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(3);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
   //users store from the store
@@ -53,7 +53,7 @@ const User = () => {
 
   const gotoPage = (e) => {
     if (e.target.value > uCount || e.target.value < 1) return false;
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setPg(e.target.value);
   };
 
@@ -62,7 +62,7 @@ const User = () => {
   for (let i = 1; i <= uCount; i++) {
     pageNumbers.push(i);
   }
-  console.log(`pages: ${pageNumbers}`);
+  // console.log(`pages: ${pageNumbers}`);
 
   //pagination BAR logic
   // const lastIndex = pg * 5; //current page * users per page 1*5=5, 2*5=10
@@ -84,7 +84,7 @@ const User = () => {
     e.preventDefault();
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
-    console.log(
+    // console.log(
       `from Update before dispathch from form: id: ${id}, name: ${name}, email:${email}`
     );
     dispatch(updateSingleUser(id, name, email, Date.now()));
@@ -115,14 +115,14 @@ const User = () => {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
+      // console.log(error);
       setsnackMsg(error);
       showSnackbar();
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      console.log(message);
+      // console.log(message);
       setsnackMsg(message);
       showSnackbar();
       dispatch({ type: "clearMessage" });

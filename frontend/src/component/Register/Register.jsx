@@ -19,9 +19,9 @@ function Register() {
     e.preventDefault();
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
-    console.log(
-      `from register  before dispathch from form: name: ${name}, email:${email}`
-    );
+    // console.log(
+    //   `from register  before dispathch from form: name: ${name}, email:${email}`
+    // );
     dispatch(registerSingleUser(name, email));
   };
 
@@ -34,14 +34,14 @@ function Register() {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
+      // console.log(error);
       setsnackMsg(error);
       showSnackbar();
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      console.log(message);
+      // console.log(message);
       setsnackMsg(message);
       showSnackbar();
       dispatch({ type: "clearMessage" });

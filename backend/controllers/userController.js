@@ -42,7 +42,7 @@ exports.old_getUsers = async (req, res) => {
 exports.getUsers = async (req, res) => {
   const usersPerPage = 5;
   try {
-    console.log("called");
+    console.log("called getUSers");
     //count User
     const userCount = await userModel.countDocuments();
     //find
