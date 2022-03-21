@@ -137,7 +137,7 @@ const User = () => {
             <tbody>
               <tr className="heading">
                 <td style={{ width: "25%" }}>Name</td>
-                <td style={{ width: "20%" }}>email</td>
+                <td style={{ width: "25%" }}>email</td>
                 <td>createdAt</td>
                 <td>updatedAt</td>
                 <td>options</td>

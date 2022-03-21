@@ -38,14 +38,14 @@ export const updateSingleUser =
         payload: data.user,
         // payload: data.user,
       });
-      alert('update success');
+      // alert('update success');
     } catch (error) {
       dispatch({
         type: "updateUserFailure",
         payload: error.response.data.message,
       });
       // console.log(error);
-      alert('update failed');
+      // alert('update failed');
     }
   };
 
