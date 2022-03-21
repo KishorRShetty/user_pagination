@@ -70,10 +70,17 @@ function Register() {
           <br />
           <input className="btn-green close" type={"submit"} />
         </form>
-        <span>
-          {show ? snackMsg : null}
-        </span>
+
         {/* {`Name: ${name} Email: ${email}`} */}
+      </div>
+      <div
+        id="snackbar"
+        className={
+          // show && { ...snackMsg.includes("Error") } ? "show red" : null
+          show ? (snackMsg.includes("Error")) ? "show red" : "show green" : null
+        }
+      >
+        {show ? snackMsg : null}
       </div>
     </>
   );
