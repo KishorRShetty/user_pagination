@@ -1,6 +1,10 @@
 # server_sided_pagination
 
+# backend
+npm start
 
+# frontend
+cd frontend/ && npm start
 
 ## Getting started
 
