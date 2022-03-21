@@ -74,9 +74,6 @@ export const updateUserReducer = createReducer(
       //remove if not needed - for testing failed msg
       state.error = action.payload || 'Update Error';
     },
-    clearErrors: (state) => {
-      state.error = null;
-    },
     clearMessage: (state) => {
       state.message = null;
     },

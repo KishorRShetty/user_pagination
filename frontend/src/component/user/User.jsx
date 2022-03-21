@@ -18,7 +18,7 @@ const User = () => {
   const { message, error } = useSelector((state) => state.updateUserState);
 
   //pagination bar
-  const [pageNumberLimit, setpageNumberLimit] = useState(5); // 5 how many pages on the bar
+  const [pageNumberLimit] = useState(5); // 5 how many pages on the bar
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
@@ -85,8 +85,8 @@ const User = () => {
     setName(e.target.name.value);
     setEmail(e.target.elements.email.value);
     // console.log(
-      `from Update before dispathch from form: id: ${id}, name: ${name}, email:${email}`
-    );
+    //   `from Update before dispathch from form: id: ${id}, name: ${name}, email:${email}`
+    // );
     dispatch(updateSingleUser(id, name, email, Date.now()));
   };
 
@@ -127,7 +127,7 @@ const User = () => {
       showSnackbar();
       dispatch({ type: "clearMessage" });
     }
-  }, [message, error]);
+  }, [dispatch,message, error]);
 
   return (
     <>
@@ -169,7 +169,7 @@ const User = () => {
                 </tr>
               ))}
               <tr className="last-row">
-                <td>All Users: {userCount}</td>
+                <td><span style={{ fontSize: "small" }}>All Users: {userCount}</span></td>
                 <td>
                   {pg > 1 ? 5 * (pg - 1) : 1} to{" "}
                   {pg * 5 > userCount ? userCount : pg * 5} of {userCount}

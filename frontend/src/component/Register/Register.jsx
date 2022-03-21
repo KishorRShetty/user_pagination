@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./Register.css";
 import { useDispatch, useSelector } from "react-redux";
-import { registerSingleUser, reg } from "../../action";
+import { registerSingleUser } from "../../action";
 
 function Register() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ function Register() {
       showSnackbar();
       dispatch({ type: "clearMessage" });
     }
-  }, [message, error]);
+  }, [dispatch,message, error]);
 
   return (
     <>
