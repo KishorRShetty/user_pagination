@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const backendUrl = `https://4990-bahejav-serversidedpagi-iur7bxv8tcq.ws-us38.gitpod.io/api/v1`;
+const backendUrl = `/api/v1`;
 
 export const getUsers = (page) => async (dispatch) => {
   try {
