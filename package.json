@@ -25,5 +25,8 @@
     "mongoose": "^6.2.6",
     "nodemon": "^2.0.15",
     "validator": "^13.7.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
