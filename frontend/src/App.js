@@ -1,7 +1,7 @@
 import "./App.css";
 import User from "./component/user/User";
 import Register from "./component/Register/Register";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./component/Header/Header";
 
 function App() {

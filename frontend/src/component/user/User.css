@@ -1,12 +1,12 @@
 .main {
-  height: 500px;
+  height: 530px;
   width: 100%;
   border: 1px solid #dddddd;
 }
 
 .userTable {
   border-collapse: collapse;
-  height: 500px;
+  height: 530px;
   width: 100%;
   display: block;
   overflow-x: auto;
@@ -28,12 +28,15 @@
   text-align: left;
   padding: 15px;
 }
+.heading td {
+  padding: 25px;
+}
 
 .userTable tr:hover {
   background-color: #ddddddb4;
 }
 
-.uicon{
+.uicon {
   border: 1px solid black;
   border-radius: 5%;
   text-transform: capitalize;
@@ -77,11 +80,22 @@
 }
 .close {
   cursor: pointer;
-  border:1px solid black;
+  border: none;
   padding: 10px;
   background-color: #e7e7e7;
-  border-radius: 5px;
-  font-size: medium;
+  font-size: small;
+  font-weight: bold;
+  margin: 2px;
+  width: 47.5%;
+  color: white;
+}
+
+.btn-red {
+  background-color: Tomato;
+}
+
+.btn-green {
+  background-color: MediumSeaGreen;
 }
 
 .btn {
@@ -91,10 +105,32 @@
   padding: 10px;
 }
 
-.btn-pn {
-  height: 30px;
-  width: 30px;
-  border: 1px solid black;
-  border-radius: 50%;
+.modalform {
+  font-size: small;
   font-weight: bold;
+}
+
+.paginator ul li {
+  padding: 15px;
+  border: 0.2px solid rgba(0, 0, 0, 0.685);
+  cursor: pointer;
+}
+.paginator ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.paginator {
+  display: flex;
+}
+
+.paginator ul li:hover {
+  background-color: DodgerBlue;
+  color: white;
+}
+
+.activepage {
+  background-color: black;
+  color: white;
 }

@@ -64,7 +64,18 @@ export const updateUserReducer = createReducer(
     updateUserSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload;
-      console.log(state.users);
+      state.message = `Update Success`;
+      // console.log(state.users);
+    },
+    clearErrors: (state) => {
+      state.error = null;
+    },updateUserFailure: (state, action) => {
+      state.loading = false;
+      //remove if not needed - for testing failed msg
+      state.error = action.payload || 'Update Error';
+    },
+    clearMessage: (state) => {
+      state.message = null;
     },
   }
 );
@@ -79,7 +90,19 @@ export const registerUserReducer = createReducer(
     registerUserSuccess: (state, action) => {
       state.loading = false;
       state.users = action.payload;
-      console.log(state.users);
+      state.message = `Registration done`;
+      // console.log(state.users);
+    },
+    registerUserFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      // console.log('getAllUsersRequest reducer failed')
+    },
+    clearErrors: (state) => {
+      state.error = null;
+    },
+    clearMessage: (state) => {
+      state.message = null;
     },
   }
 );
