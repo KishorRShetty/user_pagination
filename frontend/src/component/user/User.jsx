@@ -34,7 +34,7 @@ const User = () => {
     currentPage >= uCount
       ? setCurrentPage(uCount)
       : setCurrentPage(currentPage + 1);
-
+    // TEST Paginator Bar console.log(`inside nextbtn ${currentPage} ${typeof(currentPage)}`);
     //paginator bar
     if (currentPage < uCount) {
       if (currentPage + 1 > maxPageNumberLimit) {
@@ -58,11 +58,17 @@ const User = () => {
   };
 
   const gotoPage = (e) => {
-    if (e.target.value > uCount || e.target.value < 1) return false;
-    // console.log(e.target.value);
-    setCurrentPage(e.target.value);
-    // const max = setmaxPageNumberLimit((e.target.value)*5);
-    // setminPageNumberLimit(max-(e.target.value))
+    if (e.target.value > uCount || e.target.value < 1) return 1;
+    // TEST Paginator Barconsole.log(e.target.value);
+    setCurrentPage(Number(e.target.value));
+    console.log((((e.target.value)/5)-1)*5);
+    console.log(Math.ceil(((e.target.value)/5)-1));
+    console.log(Math.ceil(((e.target.value)/5)-1)*5);
+    setminPageNumberLimit((Math.ceil((e.target.value)/5)-1)*5);
+    console.log(currentPage);
+    setmaxPageNumberLimit(minPageNumberLimit + 5);
+    console.log(`max: ${maxPageNumberLimit} ${typeof maxPageNumberLimit}`);
+    console.log(`min: ${minPageNumberLimit} ${typeof minPageNumberLimit}`);
   };
 
   // for pages
@@ -79,7 +85,7 @@ const User = () => {
 
   useEffect(() => {
     dispatch(getUsers(currentPage));
-  }, [dispatch, currentPage, edit,minPageNumberLimit,maxPageNumberLimit]);
+  }, [dispatch, currentPage, edit, minPageNumberLimit, maxPageNumberLimit]);
 
   // console.log(`useEffect: state.user` + users);
   // console.log(users);
