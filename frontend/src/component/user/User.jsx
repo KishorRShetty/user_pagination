@@ -10,7 +10,7 @@ const User = () => {
   const [edit, setEdit] = useState(false); //editmodal
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [pg, setPg] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [show, setShow] = useState(false);
   const [snackMsg, setsnackMsg] = useState("");
@@ -29,32 +29,40 @@ const User = () => {
 
   // const uCount = userCount / 5;
   const nextPg = () => {
-    // setPg(pg + 1);
-    pg >= uCount ? setPg(uCount) : setPg(pg + 1);
+    // setCurrentPage(currentPage + 1);
+    //uCount is from redux (from database)
+    currentPage >= uCount
+      ? setCurrentPage(uCount)
+      : setCurrentPage(currentPage + 1);
 
     //paginator bar
-
-    if (pg + 1 > maxPageNumberLimit) {
-      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    if (currentPage < uCount) {
+      if (currentPage + 1 > maxPageNumberLimit) {
+        setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+        setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+      }
     }
   };
 
   const prevPg = () => {
-    // setPg(pg - 1);
-    pg <= 1 ? setPg(1) : setPg(pg - 1);
+    // setCurrentPage(currentPage - 1);
+    currentPage <= 1 ? setCurrentPage(1) : setCurrentPage(currentPage - 1);
 
     //paginator bar
-    if ((pg + 1) % pageNumberLimit === 0) {
-      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    if (currentPage > 1) {
+      if ((currentPage - 1) % pageNumberLimit === 0) {
+        setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+        setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+      }
     }
   };
 
   const gotoPage = (e) => {
     if (e.target.value > uCount || e.target.value < 1) return false;
     // console.log(e.target.value);
-    setPg(e.target.value);
+    setCurrentPage(e.target.value);
+    // const max = setmaxPageNumberLimit((e.target.value)*5);
+    // setminPageNumberLimit(max-(e.target.value))
   };
 
   // for pages
@@ -65,19 +73,19 @@ const User = () => {
   // console.log(`pages: ${pageNumbers}`);
 
   //pagination BAR logic
-  // const lastIndex = pg * 5; //current page * users per page 1*5=5, 2*5=10
+  // const lastIndex = currentPage * 5; //current page * users per page 1*5=5, 2*5=10
   // const firstIndex = lastIndex-5; // 5-5=0 10-5=5 => (0,5) - (5-10)
   // const currentUsers =
 
   useEffect(() => {
-    dispatch(getUsers(pg));
-  }, [dispatch, pg, edit]);
+    dispatch(getUsers(currentPage));
+  }, [dispatch, currentPage, edit,minPageNumberLimit,maxPageNumberLimit]);
 
   // console.log(`useEffect: state.user` + users);
   // console.log(users);
 
   const handleClick = (e) => {
-    setPg(Number(e.target.id));
+    setCurrentPage(Number(e.target.id));
   };
 
   const update = (e) => {
@@ -97,7 +105,7 @@ const User = () => {
           key={num}
           id={num}
           onClick={handleClick}
-          className={pg === num ? "activepage" : null}
+          className={currentPage === num ? "activepage" : null}
         >
           {num}
         </li>
@@ -127,7 +135,7 @@ const User = () => {
       showSnackbar();
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch,message, error]);
+  }, [dispatch, message, error]);
 
   return (
     <>
@@ -169,10 +177,15 @@ const User = () => {
                 </tr>
               ))}
               <tr className="last-row">
-                <td><span style={{ fontSize: "small" }}>All Users: {userCount}</span></td>
                 <td>
-                  {pg > 1 ? 5 * (pg - 1) : 1} to{" "}
-                  {pg * 5 > userCount ? userCount : pg * 5} of {userCount}
+                  <span style={{ fontSize: "small" }}>
+                    All Users: {userCount}
+                  </span>
+                </td>
+                <td>
+                  {currentPage > 1 ? 5 * (currentPage - 1) : 1} to{" "}
+                  {currentPage * 5 > userCount ? userCount : currentPage * 5} of{" "}
+                  {userCount}
                 </td>
                 <td>
                   <div className="paginator">
@@ -200,7 +213,7 @@ const User = () => {
                 </td>
                 <td>
                   <span style={{ fontSize: "small" }}>
-                    &nbsp;Page {pg}/{uCount}&nbsp;
+                    &nbsp;Page {currentPage}/{uCount}&nbsp;
                   </span>
                 </td>
               </tr>
@@ -208,8 +221,8 @@ const User = () => {
           </table>
         ) : (
           <>
-          <h2>No users found</h2>
-          <h4>maybe the backend is not yet started</h4>
+            <h2>No users found</h2>
+            <h4>maybe the backend is not yet started</h4>
           </>
         )}
       </div>
