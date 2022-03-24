@@ -15,6 +15,8 @@ const User = () => {
   const [show, setShow] = useState(false);
   const [snackMsg, setsnackMsg] = useState("");
 
+  const [errBorder, setErrBorder] = useState(false);
+
   const { message, error } = useSelector((state) => state.updateUserState);
 
   //pagination bar
@@ -60,49 +62,74 @@ const User = () => {
   // This didn't work.
   //This was simple.
   const gotoPageOld = (e) => {
-    if (e.target.value > uCount) return uCount; if(e.target.value < 1) return 1;
-    // TEST Paginator Barconsole.log(e.target.value);
-    setCurrentPage(Number(e.target.value));
-    console.log(Number(e.target.value) % 5 === 0);
-      console.log(`Selected: ${Number(e.target.value)}`);
+    const selectedValue = Number(e.target.value);
+    setCurrentPage(selectedValue);
+    console.log(
+      `Selected: ${Number(e.target.value)} CurrentPage: ${currentPage} `
+    );
 
-    // if (Number(e.target.value) % 5 === 0) {
-    //   setminPageNumberLimit(Number(e.target.value));
-    //   setmaxPageNumberLimit(minPageNumberLimit + 5);
-    // } else {
-      // console.log(`Selected: ${Number(e.target.value)}`);
-      console.log(`Division: ` + (e.target.value / 5 - 1) * 5);
-      console.log(`Ceiled: ` + (Math.ceil(e.target.value / 5) - 1));
-      console.log(`SetMin: ` + (Math.ceil(e.target.value / 5) - 1) * 5);
-      setminPageNumberLimit((Math.ceil(e.target.value / 5) - 1) * 5);
-      console.log("current: " + currentPage);
-      setmaxPageNumberLimit(minPageNumberLimit + 5);
-      console.log(`max: ${maxPageNumberLimit} ${typeof maxPageNumberLimit}`);
-      console.log(`min: ${minPageNumberLimit} ${typeof minPageNumberLimit}`);
-    // }
+    if (selectedValue > maxPageNumberLimit) {
+      console.log(
+        `Greater` + Math.ceil(selectedValue / maxPageNumberLimit) * 5
+      );
+      console.log(true);
+      setmaxPageNumberLimit(maxPageNumberLimit + 5);
+      setminPageNumberLimit(minPageNumberLimit + 5);
+
+      console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
+    }
+
+    if (selectedValue <= minPageNumberLimit) {
+      console.log(`Lesser` + Math.ceil(selectedValue / maxPageNumberLimit) * 5);
+      console.log(true);
+      setmaxPageNumberLimit(maxPageNumberLimit - 5);
+      setminPageNumberLimit(minPageNumberLimit - 5);
+
+      console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
+    }
   };
 
   const gotoPage = (e) => {
     const selectedValue = Number(e.target.value);
+
+    if (selectedValue < 1 || selectedValue > uCount) {
+      setErrBorder(true);
+      return 1;
+    }
+    setErrBorder(false);
     setCurrentPage(selectedValue);
-    console.log(`Selected: ${Number(e.target.value)} CurrentPage: ${currentPage} `);
-    
-    if(selectedValue>maxPageNumberLimit){
+    console.log(
+      `Selected: ${Number(e.target.value)} CurrentPage: ${currentPage} `
+    );
+
+    if (selectedValue > maxPageNumberLimit) {
+      console.log(
+        `Greater` + Math.ceil(selectedValue / maxPageNumberLimit) * 5
+      );
       console.log(true);
-      setmaxPageNumberLimit(maxPageNumberLimit+5);
-      setminPageNumberLimit(minPageNumberLimit+5);
+
+      const max = Math.ceil(selectedValue / maxPageNumberLimit) * 5;
+
+      // setmaxPageNumberLimit(maxPageNumberLimit + 5);
+      setmaxPageNumberLimit(max);
+      setminPageNumberLimit(max - 5);
 
       console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
-
     }
 
-    if(selectedValue<=minPageNumberLimit){
+    if (selectedValue <= minPageNumberLimit) {
+      console.log(`Lesser` + Math.ceil(selectedValue / maxPageNumberLimit) * 5);
       console.log(true);
-      setmaxPageNumberLimit(maxPageNumberLimit-5);
-      setminPageNumberLimit(minPageNumberLimit-5);
+      // setmaxPageNumberLimit(maxPageNumberLimit - 5);
+      // setminPageNumberLimit(minPageNumberLimit - 5);
+
+      const min = Math.ceil(selectedValue / maxPageNumberLimit) * 5;
+
+      // setmaxPageNumberLimit(maxPageNumberLimit + 5);
+      setmaxPageNumberLimit(min);
+      setminPageNumberLimit(min - 5);
 
       console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
-
     }
   };
 
@@ -250,6 +277,7 @@ const User = () => {
                     max={Number(uCount)}
                     onBlur={gotoPage}
                     name="pageNo"
+                    className={errBorder?"redBorder":null}
                   />
                 </td>
                 <td>
