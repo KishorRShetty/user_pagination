@@ -57,18 +57,53 @@ const User = () => {
     }
   };
 
-  const gotoPage = (e) => {
-    if (e.target.value > uCount || e.target.value < 1) return 1;
+  // This didn't work.
+  //This was simple.
+  const gotoPageOld = (e) => {
+    if (e.target.value > uCount) return uCount; if(e.target.value < 1) return 1;
     // TEST Paginator Barconsole.log(e.target.value);
     setCurrentPage(Number(e.target.value));
-    console.log((((e.target.value)/5)-1)*5);
-    console.log(Math.ceil(((e.target.value)/5)-1));
-    console.log(Math.ceil(((e.target.value)/5)-1)*5);
-    setminPageNumberLimit((Math.ceil((e.target.value)/5)-1)*5);
-    console.log(currentPage);
-    setmaxPageNumberLimit(minPageNumberLimit + 5);
-    console.log(`max: ${maxPageNumberLimit} ${typeof maxPageNumberLimit}`);
-    console.log(`min: ${minPageNumberLimit} ${typeof minPageNumberLimit}`);
+    console.log(Number(e.target.value) % 5 === 0);
+      console.log(`Selected: ${Number(e.target.value)}`);
+
+    // if (Number(e.target.value) % 5 === 0) {
+    //   setminPageNumberLimit(Number(e.target.value));
+    //   setmaxPageNumberLimit(minPageNumberLimit + 5);
+    // } else {
+      // console.log(`Selected: ${Number(e.target.value)}`);
+      console.log(`Division: ` + (e.target.value / 5 - 1) * 5);
+      console.log(`Ceiled: ` + (Math.ceil(e.target.value / 5) - 1));
+      console.log(`SetMin: ` + (Math.ceil(e.target.value / 5) - 1) * 5);
+      setminPageNumberLimit((Math.ceil(e.target.value / 5) - 1) * 5);
+      console.log("current: " + currentPage);
+      setmaxPageNumberLimit(minPageNumberLimit + 5);
+      console.log(`max: ${maxPageNumberLimit} ${typeof maxPageNumberLimit}`);
+      console.log(`min: ${minPageNumberLimit} ${typeof minPageNumberLimit}`);
+    // }
+  };
+
+  const gotoPage = (e) => {
+    const selectedValue = Number(e.target.value);
+    setCurrentPage(selectedValue);
+    console.log(`Selected: ${Number(e.target.value)} CurrentPage: ${currentPage} `);
+    
+    if(selectedValue>maxPageNumberLimit){
+      console.log(true);
+      setmaxPageNumberLimit(maxPageNumberLimit+5);
+      setminPageNumberLimit(minPageNumberLimit+5);
+
+      console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
+
+    }
+
+    if(selectedValue<=minPageNumberLimit){
+      console.log(true);
+      setmaxPageNumberLimit(maxPageNumberLimit-5);
+      setminPageNumberLimit(minPageNumberLimit-5);
+
+      console.log(`Max: ${maxPageNumberLimit} Min: ${minPageNumberLimit}`);
+
+    }
   };
 
   // for pages
